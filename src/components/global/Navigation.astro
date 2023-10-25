@@ -1,25 +1,67 @@
-<section
-  class="mx-auto border-white border-t 2xl:max-w-7xl bg-black border-b justify-center lg:fixed lg:z-50 w-full">
-  <div class="mx-auto bg-black justify-center w-full">
+<header
+  id="landing-header"
+  class="mx-auto border-white border-t bg-black/5 backdrop-blur-lg border-b justify-center lg:fixed lg:z-50 w-full"
+>
+  <nav
+    class="text-white relative text-center items-center md:gap-5 w-full flex flex-col justify-between sm:flex-row sm:px-8"
+  >
+    <a
+      href="./"
+      class="text-md tracking-10 font-display inline-flex items-center md:text-center py-4 uppercase"
+      >SensorNews
+    </a>
+    <a
+      href="https://github.com/michael-andreuzza/astromax"
+      class="w-full font-display leading-relaxed md:ml-auto md:w-auto tracking-10 px-6 md:py-4 text-center text-xs hover:text-md uppercase transition-all duration-500"
+      >Latinoamerica</a
+    ><a
+      href="mailto:your@name.com"
+      class="w-full font-display leading-relaxed md:ml-auto md:w-auto tracking-10 px-6 md:py-4 text-center text-xs hover:text-md uppercase transition-all duration-300"
+      >Europa</a
+    ><a
+      href="mailto:your@name.com"
+      class="w-full font-display leading-relaxed md:ml-auto md:w-auto tracking-10 px-6 md:py-4 text-center text-xs hover:text-md uppercase transition-all duration-300"
+      >Medio Oriente</a
+    >
     <div
-      class="mx-auto border-white border-x max-w-7xl flex flex-col lg:flex-row lg:items-center lg:justify-between w-full">
-      <div
-        class="text-white text-center items-center w-full flex flex-col justify-between md:px-0 sm:flex-row sm:px-8">
-        <a
-          href="https://www.lexingtonthemes.com"
-          class="text-white text-xs font-display inline-flex items-center md:px-8 md:text-center py-4 uppercase"
-          ><span>ASTROMAX ⏤ By Lexington Themes &nbsp; &rarr;</span>
-        </a>
-        <a
-          href="https://github.com/michael-andreuzza/astromax"
-          class="w-full bg-white duration-200 font-display hover:bg-black hover:text-white lg:ml-auto lg:w-auto px-6 py-4 sm:rounded-full text-black text-center text-xs uppercase"
-          >Github</a
-        ><a
-          href="mailto:your@name.com"
-          class="w-full bg-carrot duration-200 font-display hover:bg-blacktext-white lg:w-auto px-6 py-4 sm:rounded-full text-black hover:text-white text-center text-xs uppercase"
-          >Get a quote</a
-        >
-      </div>
+      id="menu-backdrop"
+      class={`  absolute var(--btnstate) rounded
+        translate-x-[var(--left)] translate-y-[var(--top)]
+        left-0 top-0
+        w-[var(--width)] h-[var(--height)]
+        transition-all duration-500
+        ease-in-out opacity-0 -z-10`}
+    >
     </div>
-  </div>
-</section>
+  </nav>
+</header>
+
+<script>
+  const listItem = document.querySelectorAll("#landing-header a");
+  const menuBackDrop = document.querySelector("#menu-backdrop") as HTMLElement;
+
+  listItem.forEach((item) => {
+    item.addEventListener("mouseenter", () => {
+      const { left, top, width, height } = item.getBoundingClientRect();
+      const { clientHeight, clientWidth } = item;
+
+      console.log({ left, top, width, height });
+      console.log({ clientHeight, clientWidth });
+
+      menuBackDrop.style.setProperty("--btnstate", `gradient-grid`);
+      menuBackDrop.style.setProperty("--left", `${left}px`);
+      menuBackDrop.style.setProperty("--top", `${top}px`);
+      menuBackDrop.style.setProperty("--width", `${width}px`);
+      menuBackDrop.style.setProperty("--height", `${height}px`);
+      menuBackDrop.style.opacity = "1";
+      menuBackDrop.style.visibility = "visible";
+      menuBackDrop.style.backgroundImage =
+        "linear-gradient(180deg, rgba(2,0,36,0) 70%, rgba(255,255,255,1) 100%);";
+    });
+
+    item.addEventListener("mouseleave", () => {
+      menuBackDrop.style.opacity = "0";
+      menuBackDrop.style.visibility = "hidden";
+    });
+  });
+</script>
